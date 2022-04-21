@@ -2,6 +2,7 @@ package com.pdist.message.Service;
 
 import com.pdist.message.Model.Message;
 import com.pdist.message.Repository.MessageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,11 +11,8 @@ import java.util.List;
 @Service
 public class MessageService {
 
-    private final MessageRepository messageRepository;
-
-    public MessageService(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
-    }
+    @Autowired
+    private MessageRepository messageRepository;
 
     public List<Message> read() {
         return this.messageRepository.findAll();

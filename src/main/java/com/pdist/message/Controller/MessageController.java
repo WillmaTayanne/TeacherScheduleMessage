@@ -2,6 +2,7 @@ package com.pdist.message.Controller;
 
 import com.pdist.message.Model.Message;
 import com.pdist.message.Service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @RequestMapping("/")
 public class MessageController {
 
+    @Autowired
     private MessageService messageService;
 
     @GetMapping("/message")
