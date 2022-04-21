@@ -1,0 +1,43 @@
+package com.pdist.message.Model;
+
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Message {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    private Long id;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id_origin")
+    private Usuario usuarioIdOrigin;
+
+    @NotNull
+    private Date data;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id_destination")
+    private Usuario usuarioIdDestination;
+
+    @NotNull
+    private String title;
+
+    @NotNull
+    private String description;
+}
