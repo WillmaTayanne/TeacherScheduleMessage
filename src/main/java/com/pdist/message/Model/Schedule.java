@@ -1,5 +1,6 @@
 package com.pdist.message.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,38 +10,40 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Message {
-
+@NoArgsConstructor
+public class Schedule {
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private Long id;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "user_id_origin")
-    private Usuario usuarioIdOrigin;
+    private String subject;
 
     @NotNull
-    @Column(name = "dateTime")
+    @ManyToOne
+    @JoinColumn(name = "id_teacher")
+    private Usuario teacher;
+
+    @OneToMany(mappedBy = "id")
+    @JsonIgnore
+    private List<Usuario> students;
+
+    @NotNull
+    @Column(name = "dateTimeBegin")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Timestamp dateTime;
+    private Timestamp dateTimeBegin;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "user_id_destination")
-    private Usuario usuarioIdDestination;
+    @Column(name = "dateTimeEnd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private Timestamp dateTimeEnd;
 
-    @NotNull
-    private String title;
-
-    @NotNull
     private String description;
 }
