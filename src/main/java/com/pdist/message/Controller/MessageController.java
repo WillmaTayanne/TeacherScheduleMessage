@@ -1,5 +1,6 @@
 package com.pdist.message.Controller;
 
+import com.pdist.message.DTO.MessageRequest;
 import com.pdist.message.Model.Message;
 import com.pdist.message.Service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,13 @@ public class MessageController {
     }
 
     @PostMapping("/message")
-    public Message create(@RequestBody Message message){
-        return this.messageService.push(message);
+    public Message create(@RequestBody MessageRequest messageRequest){
+        return this.messageService.create(messageRequest);
     }
 
     @PutMapping("/message/{id}")
     public Message update(@RequestBody Message message){
-        return this.messageService.push(message);
+        return this.messageService.update(message);
     }
 
     @DeleteMapping("/message/{id}")

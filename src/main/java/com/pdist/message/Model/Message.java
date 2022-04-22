@@ -26,7 +26,7 @@ public class Message {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id_origin")
-    private Usuario usuarioIdOrigin;
+    private Usuario userIdOrigin;
 
     @NotNull
     @Column(name = "dateTime")
@@ -36,11 +36,23 @@ public class Message {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id_destination")
-    private Usuario usuarioIdDestination;
+    private Usuario userIdDestination;
 
     @NotNull
     private String title;
 
     @NotNull
     private String description;
+
+    @NotNull
+    private boolean isRead;
+
+    public Message(Usuario userIdOrigin, Usuario userIdDestination, String title, String description) {
+        this.userIdOrigin = userIdOrigin;
+        this.dateTime = new Timestamp(System.currentTimeMillis());
+        this.userIdDestination = userIdDestination;
+        this.title = title;
+        this.description = description;
+        this.isRead = false;
+    }
 }

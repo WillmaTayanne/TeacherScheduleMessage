@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,7 +34,7 @@ public class Schedule {
 
     @OneToMany(mappedBy = "id")
     @JsonIgnore
-    private List<Usuario> students;
+    private List<Usuario> students = new ArrayList<>();
 
     @NotNull
     @Column(name = "dateTimeBegin")
@@ -46,4 +47,12 @@ public class Schedule {
     private Timestamp dateTimeEnd;
 
     private String description;
+
+    public Schedule(String subject, Usuario teacher, Timestamp dateTimeBegin, Timestamp dateTimeEnd, String description) {
+        this.subject = subject;
+        this.teacher = teacher;
+        this.dateTimeBegin = dateTimeBegin;
+        this.dateTimeEnd = dateTimeEnd;
+        this.description = description;
+    }
 }

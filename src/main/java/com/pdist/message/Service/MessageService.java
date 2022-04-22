@@ -1,7 +1,9 @@
 package com.pdist.message.Service;
 
+import com.pdist.message.DTO.MessageRequest;
 import com.pdist.message.Model.Message;
 import com.pdist.message.Repository.MessageRepository;
+import com.pdist.message.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,9 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     public List<Message> read() {
         return this.messageRepository.findAll();
     }
@@ -23,7 +28,13 @@ public class MessageService {
     }
 
     @Transactional
-    public Message push(Message message){
+    public Message create(MessageRequest messageRequest){
+        Message message = messageRequest.toMessage(usuarioRepository);
+        return this.messageRepository.save(message);
+    }
+
+    @Transactional
+    public Message update(Message message){
         return this.messageRepository.save(message);
     }
 

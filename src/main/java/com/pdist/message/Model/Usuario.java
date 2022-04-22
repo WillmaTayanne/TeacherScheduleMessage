@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "cpf"),
-        @UniqueConstraint(columnNames = "matricula")})
+        @UniqueConstraint(columnNames = "registration")})
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Data
 @AllArgsConstructor
@@ -25,13 +25,13 @@ public class Usuario {
     private Long id;
 
     @NotNull
-    private String nome;
+    private String name;
 
     @NotNull
     private String cpf;
 
     @NotNull
-    private String matricula;
+    private String registration;
 
     @NotNull
     private String password;
@@ -43,7 +43,7 @@ public class Usuario {
     private String email;
 
     @NotNull
-    private String telefone;
+    private String telephone;
 
     @OneToMany(mappedBy = "id")
     @JsonIgnore
